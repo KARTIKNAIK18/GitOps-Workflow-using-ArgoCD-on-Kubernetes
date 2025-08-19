@@ -36,7 +36,7 @@ metadata:
   name: mongo-service
   labels:
     app: mongodb
-sepc:
+spec:
   selector:
     app: mongodb
   ports:

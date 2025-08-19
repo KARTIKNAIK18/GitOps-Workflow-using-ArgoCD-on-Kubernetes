@@ -20,9 +20,9 @@ spec:
         command: ['sh', '-c' , until curl -s  "http://backend-service:5000/api' && do echo "Initializing frontend..."; sleep 5; done']
       containers:
       - name: frontend-container
-        image: 
+        image: kartiknaik/task-manager-frontend:v1
         ports:
-        - containerPort: 80
+        - containerPort: 3000
         env:
         - name: REACT_APP_API_URL
           value: "http://backend-service:5000/api"
