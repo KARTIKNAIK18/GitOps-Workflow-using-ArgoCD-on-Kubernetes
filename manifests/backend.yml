@@ -26,7 +26,7 @@ spec:
         - name: MONGO_URI
           value: "mongodb://root:root@mongo-service:27017/taskmanager?authSource=admin"
         - name: JWT_SECRET
-          value: ""
+          value: "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTc1NTY5ODU0MCwiaWF0IjoxNzU1Njk4NTQwfQ.dvYWq3zanTpztLAR4t3cKUZ_4dUciESEsujB89Q_VNs"
 
 ---
 
