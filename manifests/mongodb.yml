@@ -21,9 +21,9 @@ spec:
         ports:
         - containerPort: 27017
         env:
-        - name: MONOGO_USERNAME
+        - name: MONGO_INITDB_ROOT_USERNAME
           value: "root"
-        - name: MONGO_PASSWORD
+        - name: MONGO_INITDB_ROOT_PASSWORD
           value: "root"
 
 
@@ -45,4 +45,5 @@ spec:
   - protocol: TCP 
     port: 27017
     targetPort: 27017
-  type: NodePort
+  type: ClusterIP
+  clusterIP: None

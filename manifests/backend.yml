@@ -24,7 +24,7 @@ spec:
         - name: PORT
           value: "5000"
         - name: MONGO_URI
-          value: "mongodb://mongo-service:27017/taskmanager"
+          value: "mongodb://root:root@mongo-service:27017/taskmanager?authSource=admin"
         - name: JWT_SECRET
           value: ""
         readinessProbe:
