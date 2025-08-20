@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: kartiknaik/task-manager-frontend:v3
+        image: kartiknaik/task-manager-frontend:v5
         ports:
         - containerPort: 3000
         env:
