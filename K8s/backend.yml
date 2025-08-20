@@ -2,12 +2,13 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: backend-deployment
+  namespace: argo
   labels:
     app: backend
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: backend
   template:
     metadata:
@@ -26,6 +27,14 @@ spec:
           value: "mongodb://mongo-service:27017/taskmanager"
         - name: JWT_SECRET
           value: ""
+        readinessProbe:
+          httpGet:
+            path: /api
+            port: 5000
+            host: backend-service
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
 
 
 ---
@@ -34,6 +43,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
+  namespace: argo
   labels:
     app: backend
 spec:

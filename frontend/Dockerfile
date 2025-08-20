@@ -1,22 +1,13 @@
-FROM node:alpine3.22 AS builder
-
+FROM node:18 AS builder
 WORKDIR /app
-
-COPY /package.json .
-
+COPY package.json package-lock.json ./
 RUN npm install
-
-
-
-FROM node:alpine3.22
-
-WORKDIR /app
-
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package*.json ./
-
 COPY . .
 
+FROM node:18
+WORKDIR /app
+COPY --from=builder /app /app
 EXPOSE 3000
-
-CMD ["npm","start"]
+ENV SHELL=/bin/bash
+ENV BROWSER=none
+CMD ["npm", "start"]
