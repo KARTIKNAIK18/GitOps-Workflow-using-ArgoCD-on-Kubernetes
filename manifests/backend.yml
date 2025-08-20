@@ -27,15 +27,6 @@ spec:
           value: "mongodb://root:root@mongo-service:27017/taskmanager?authSource=admin"
         - name: JWT_SECRET
           value: ""
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 5000
-            host: backend-service
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          failureThreshold: 3
-
 
 ---
 
