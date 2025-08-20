@@ -29,7 +29,7 @@ spec:
           value: ""
         readinessProbe:
           httpGet:
-            path: /healthz
+            path: /api
             port: 5000
             host: backend-service
           initialDelaySeconds: 10
