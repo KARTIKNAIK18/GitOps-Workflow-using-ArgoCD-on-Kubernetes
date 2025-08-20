@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: kartiknaik/task-app-backend:v1
+        image: kartiknaik/task-app-backend:v2
         ports:
         - containerPort: 5000
         env:
