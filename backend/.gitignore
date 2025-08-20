@@ -1,2 +1,35 @@
-node_modules/
+# Node modules should not be copied from host
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
+build
+dist
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Environment files (optional, if using runtime env vars)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# IDE/editor files
+.vscode
+.idea
+*.swp

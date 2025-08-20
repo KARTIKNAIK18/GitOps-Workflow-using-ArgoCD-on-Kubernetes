@@ -42,12 +42,10 @@ const Profile = ({ tasks, completedCount, onLogout }) => {
             {editMode ? (
               <>
                 <TextField label="Username" value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} fullWidth />
-                <TextField label="Email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} fullWidth />
               </>
             ) : (
               <>
                 <Typography variant="h6">{profile.username}</Typography>
-                <Typography variant="body2" color="text.secondary">{profile.email || 'No email set'}</Typography>
               </>
             )}
             <Divider sx={{ width: '100%', my: 2 }} />

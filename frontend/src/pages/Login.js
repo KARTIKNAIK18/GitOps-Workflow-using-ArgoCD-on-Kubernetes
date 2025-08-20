@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignup, setIsSignup] = useState(false);
   const [error, setError] = useState('');
@@ -15,7 +16,8 @@ const Login = () => {
     setError('');
     try {
       const endpoint = isSignup ? '/auth/signup' : '/auth/login';
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}${endpoint}`, { username, password });
+      const payload = isSignup ? { username, email, password } : { username, password };
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}${endpoint}`, payload);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
