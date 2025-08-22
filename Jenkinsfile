@@ -7,9 +7,21 @@ pipeline {
     }
 
     stages {
-        stage('Test Parameters') {
+        stage('Validate parmeters) {
+            steps{
+                if (param.Frontend_Docker_TAG == '' && param.Backend_Docker_TAG == '')
+                    error('pararmeters cannot be empty')
+            }
+        }
+        stage('Checkout') {
+            steps{
+                git checkout: branch: 'main', url 'https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git'
+                sh  'ls -l'
+            }
+        }
+        stage('Docker Build') {
             steps {
-                echo "Frontend Docker Tag: ${params.Frontend_Docker_TAG}"
+                
                 echo "Backend Docker Tag: ${params.Backend_Docker_TAG}"
             }
         }
