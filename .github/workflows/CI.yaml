@@ -22,6 +22,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@master
         with:
           organization: github-actions-workfolw
+          projectKey: github-actions-workfolw_gitops-workflow
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
