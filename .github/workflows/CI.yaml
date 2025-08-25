@@ -18,16 +18,10 @@ jobs:
       # - name: Install dependencies
       #   run: npm install
   
-  test:
+    SonarQube Analysis:
     runs-on: ubuntu-latest
     needs: cheackout
     steps:
-
-      - name: Super-linter
-        uses: super-linter/super-linter@v8.1.0 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: sonarqube scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
@@ -35,7 +29,10 @@ jobs:
           SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-
+    security-scan::
+    runs-on: ubuntu-latest
+    needs: cheackout
+    steps:
       - name: Trivy Vulnerability Scan  
         uses: aquasecurity/trivy-action@master
         with:
