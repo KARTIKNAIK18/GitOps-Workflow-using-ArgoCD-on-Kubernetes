@@ -6,11 +6,15 @@ on:
         - main
   
 jobs:
-  build:
+  cheackout:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
   
   test:
     runs-on: ubunut-latest
@@ -26,10 +30,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Trivy vulnarability scan
+      - name: Trivy Vulnerability Scan  
         uses: aquasecurity/trivy-action@master
         with:
-            scan-type: 'fs'
-            format: 'table'
-            Severity: 'CRITICAL'
+            scan-type: fs
+            format: table
+            severity: CRITICAL
 
