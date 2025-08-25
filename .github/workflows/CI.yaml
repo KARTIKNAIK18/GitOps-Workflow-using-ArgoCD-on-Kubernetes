@@ -15,7 +15,7 @@ jobs:
 
 
   sonarqube-analysis:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: cheackout
     steps:
     - name: Checkout code
