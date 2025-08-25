@@ -21,12 +21,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: SonarQube Scan
-      uses: sonarsource/sonarcloud-github-action@master 
-      with:
-        organization: ${{ secrets.SONAR_ORG }}
-        projectKey: ${{ secrets.SONAR_PROJECT }}
+      uses: SonarSource/sonarqube-scan-action@master 
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
 
   security-scan:
     runs-on: ubuntu-latest
