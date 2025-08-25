@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: sonarqube scan
         uses: SonarSource/sonarqube-scan-action@master
+        with:
+          args: -X
         env:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
           SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
