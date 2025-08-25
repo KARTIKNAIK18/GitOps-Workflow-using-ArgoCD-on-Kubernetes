@@ -1,48 +1,64 @@
-name: CI-pipeline
+name: Node.js CI Pipeline
 
 on:
   push:
     branches:
-        - main
-  
+      - main
+
 jobs:
+
+  # Stage 1: Checkout
   cheackout:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      # - name: set up node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '18'
-      # - name: Install dependencies
-      #   run: npm install
-  
-  test:
+
+  # Stage 2: Code Quality
+  code-quality:
     runs-on: ubuntu-latest
     needs: cheackout
     steps:
-
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Super-linter
-        uses: super-linter/super-linter@v8.1.0 
+        uses: super-linter/super-linter@v8.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_BRANCH: main
 
-      - name: sonarqube scan
-        uses: SonarSource/sonarqube-scan-action@master
+  # Stage 3: Security Scan
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: cheackout
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Trivy FS Scan
+        uses: aquasecurity/trivy-action@v0.9.1
+        with:
+          scan-type: fs
+          format: table
+          severity: CRITICAL
+
+  # Stage 4: SonarQube Analysis
+  sonar:
+    runs-on: ubuntu-latest
+    needs: cheackout
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5.3.0
+        with:
+          args: -X
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-      - name: Trivy Vulnerability Scan  
-        uses: aquasecurity/trivy-action@master
-        with:
-            scan-type: fs
-            format: table
-            severity: CRITICAL
-
