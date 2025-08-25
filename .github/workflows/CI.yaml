@@ -18,13 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: cheackout
     steps:
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        with:
-          organization: github-actions-workfolw
-          projectKey: github-actions-workfolw_gitops-workflow
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - name: SonarQube Scan
+      uses: sonarsource/sonarcloud-github-action@master # Ex: v4.0.0, See the latest version at https://github.com/marketplace/actions/sonarcloud-scan
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   security-scan:
     runs-on: ubuntu-latest
