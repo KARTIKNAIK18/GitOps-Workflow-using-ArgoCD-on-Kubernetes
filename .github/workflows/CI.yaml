@@ -1,0 +1,36 @@
+name: CI-pipeline
+
+on:
+  push:
+    branches:
+      - main:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
+  test:
+    runs-on: ubunut-latest
+    steps:
+      - name: sonarqube scan
+        uses: SonarSourc/sonarqube-scan-action@main
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v8.1.0 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trivy vulnarability scan
+        uses: aquasecurity/trivy-action@master
+        with:
+            scan-type: 'fs'
+            format: 'table'
+            Severity: 'CRITICAL'
+
+  
