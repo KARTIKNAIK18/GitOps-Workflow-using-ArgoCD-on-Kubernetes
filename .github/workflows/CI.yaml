@@ -19,17 +19,18 @@ jobs:
   test:
     runs-on: ubunut-latest
     steps:
-      - name: sonarqube scan
-        uses: SonarSourc/sonarqube-scan-action@main
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: Super-linter
         uses: super-linter/super-linter@v8.1.0 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: sonarqube scan
+        uses: SonarSourc/sonarqube-scan-action@main
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Trivy Vulnerability Scan  
         uses: aquasecurity/trivy-action@master
         with:
