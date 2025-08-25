@@ -15,17 +15,12 @@ jobs:
 
 
   sonarqube-analysis:
-    runs-on: ubuntu-latest
-    needs: cheackout
-    steps:
-      - name: sonarqube scan
-        uses: SonarSource/sonarqube-scan-action@master
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         with:
-          args: -X
+          organization: github-actions-workfolw
         env:
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-          SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   security-scan:
     runs-on: ubuntu-latest
