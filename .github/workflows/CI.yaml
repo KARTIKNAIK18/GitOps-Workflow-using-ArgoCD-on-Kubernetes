@@ -43,7 +43,7 @@ jobs:
         uses: github/codeql-action/analyze@v3
       
       - name: logs Artifact
-        uses: action/Artifacts@v3
+        uses: actions/upload-artifact@v4
         with:
           name: codeql-logs
           path: /github/workflow/codeql/logs  
@@ -63,7 +63,7 @@ jobs:
             format: table
             severity: CRITICAL
       - name: logs Artifact
-        uses: action/Artifacts@v3
+        uses: actions/upload-artifact@v4
         with:
           name: trivy-logs
           path: /github/workflow/trivy/logs
