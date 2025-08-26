@@ -41,10 +41,16 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
+      
+      - name: logs Artifact
+        uses: action/Artifacts@v3
+        with:
+          name: codeql-logs
+          path: /github/workflow/codeql/logs  
 
     
 
-  security-scan:
+  Trivy file system scan:
     runs-on: ubuntu-latest
     needs: cheackout
     steps:
@@ -56,4 +62,10 @@ jobs:
             scan-type: fs
             format: table
             severity: CRITICAL
+      - name: logs Artifact
+        uses: action/Artifacts@v3
+        with:
+          name: trivy-logs
+          path: /github/workflow/trivy/logs
+
 
