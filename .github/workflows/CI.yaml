@@ -50,7 +50,7 @@ jobs:
 
     
 
-  Trivy file system scan:
+  trivy-file-system-scan:
     runs-on: ubuntu-latest
     needs: cheackout
     steps:
