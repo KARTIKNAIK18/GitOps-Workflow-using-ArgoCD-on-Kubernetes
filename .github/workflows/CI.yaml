@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: codeql-logs
-          path: /github/workflow/codeql/logs  
+          path: .  
 
     
 
@@ -66,6 +66,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: trivy-logs
-          path: /github/workflow/trivy/logs
+          path: .
 
 
