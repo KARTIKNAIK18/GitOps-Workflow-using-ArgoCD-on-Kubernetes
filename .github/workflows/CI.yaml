@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: codeql-logs
-          path: .  
+          path: codeql-report.sarif 
 
     
 
@@ -66,6 +66,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: trivy-logs
-          path: .
+          path: trivy-report.sarif
 
 
