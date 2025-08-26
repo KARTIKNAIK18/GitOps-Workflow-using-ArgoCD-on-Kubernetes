@@ -22,7 +22,7 @@ jobs:
       contents: read
       security-events: write
     
-    statergy:
+    strategy:
       fail-fast: false
       matrix:
         language: [ 'javascript']
@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Initialize CodeQL 
         uses: github/codeql-action/init@v2
         with:
