@@ -125,7 +125,7 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/note-app-frontned:${{ env.frontend-version}}
         
       - name: backend Build and push Docker image
-        if: staps.image-ex-backend.outputs.exits == 'false'
+        if: steps.image-ex-backend.outputs.exits == 'false'
         uses: docker/build-push-action@v6
         with:
           context: ./backend
