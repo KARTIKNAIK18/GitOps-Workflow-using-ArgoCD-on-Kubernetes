@@ -91,16 +91,43 @@ jobs:
       - name: Read the env 
         run: |
           echo "frontend-version=$(cat frontend/version.txt)" >> $GITHUB_ENV
+          echo "backend-verion=$(cat backend/version.txt)" >> $GITHUB_ENV
         
       - name: env
         run: |
           echo "Version is ${{ env.frontend-version }}"
+          echo "Version is ${{ env.backend-verion }}"
 
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: ./frontend
-      #     push: true
-      #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-app:latest
-      #     cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/my-app:cache
-      #     cache-to: type=inline
+
+      - name: cheack the frontend image existence
+        id: image-ex-frontend
+        run: |
+            if docker pull ${{secrets.DOCKER_HUB_USERNAME}}/note-app-frontend:${{ env.frontend-version}}; then
+              echo "exits=true" >> $GITHUB_OUTPUT
+            else
+              echo "exits=false" >> $GITHUB_OUTPUT
+      - name: cheack the backend image existence
+        id: image-ex-backend
+        run: |
+            if docker pull ${{secrets.DOCKER_HUB_USERNAME}}/note-app-backend:${{ env.backend-verion}}; then
+              echo "exits=true" >> $GITHUB_OUTPUT
+            else
+              echo "exits=false" >> $GITHUB_OUTPUT
+
+
+
+      - name: fonrtend Build and push Docker image
+        if: steps.image-ex-frontend.outputs.exits == 'false'
+        uses: docker/build-push-action@v6
+        with:
+          context: .frontend
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/note-app-frontned:${{ env.frontend-version}}
+        
+      - name: backend Build and push Docker image
+        if: staps.image-ex-backend.outputs.exits == 'false'
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/note-app-backend:${{ env.backend-verion}}  
