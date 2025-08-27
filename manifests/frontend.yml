@@ -20,13 +20,6 @@ spec:
         image: kartiknaik/task-manager-frontend:v5
         ports:
         - containerPort: 3000
-        env:
-        - name: REACT_APP_API_URL
-          value: "http://backend-service:5000/api"
-        - name: SHELL
-          value: /bin/bash
-        - name: BROWSER
-          value: none
         readinessProbe:
           httpGet:
             path: /
