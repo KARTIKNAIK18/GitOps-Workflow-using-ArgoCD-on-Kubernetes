@@ -24,11 +24,11 @@ jobs:
       - name: Trigger jenkins job
         uses: joshlk/jenkins-githubaction@master
         with:
-          url: http://172.20.23.105:8080/
+          url: ${{ secrets.JENKINS_URL }}
           job_name: Gitops CD
           username: ${{ secrets.JENKINS_USER }}
           api_token: ${{ secrets.JENKINS_TOKEN }}
-          timeout: "1000"
+          timeout: "60"
 
   # codeql-analysis:
   #   runs-on: ubuntu-latest
