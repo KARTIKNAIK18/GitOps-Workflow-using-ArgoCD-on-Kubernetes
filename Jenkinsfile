@@ -1,31 +1,36 @@
-pipeline {
+pipeline{
     agent any
+    environment{
+        DOCKER_USER = credentials('DOCKER_USER')
+    }
+    stages{
+        stage('Cheackout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git' 
+            }
+        }
+        stage('Read Files'){
+            steps{
+                script{
+                    FRONTEND_VERSION = readFile ('frontend/version.txt').trim()
+                    BACKEND_VERSION = readFile ('backend/version.txt').trim()
 
-    parameters {
-        string(name: 'Frontend_Docker_TAG', defaultValue: 'latest', description: 'Tag for Frontend Docker Image')
-        string(name: 'Backend_Docker_TAG', defaultValue: 'latest', description: 'Tag for Backend Docker Image')
+                    FRONTENDIMAGE = "${env.DOCKER_USER}/note-app-frontend:${FRONTEND_VERSION}"
+                    BACKENDIMAGE = "${env.DOCKER_USER}/note-app-backend:${BACKEND_VERSION}"
+                }
+            }
+        }
+        stage('Update Manifests'){
+            steps{
+                sh '''
+                    sed -i "s|image: .*|image: ${FRONTENDIMAGE}|g" manifests/frontend.yml
+                    sed -i "s|image: .*|image: ${BACKENDIMAGE}|g" manifests/backend.yml
+                '''
+                sh 'cat manifests/frontend.yml'
+                sh 'cat manifests/backend.yml'
+            }
+
+        }       
     }
 
-    stages {
-        stage('Validate parmeters) {
-            steps{
-                if (param.Frontend_Docker_TAG == '' && param.Backend_Docker_TAG == '')
-                    error('pararmeters cannot be empty')
-            }
-        }
-        stage('Checkout') {
-            steps{
-                git checkout: branch: 'main', url 'https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git'
-                sh  'ls -l'
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                
-                echo "Backend Docker Tag: ${params.Backend_Docker_TAG}"
-                sh    'docker build -t ${DOCKERHUB_USERNAME}/notes-app-frontend:$params.Frontend_Docker_TAG -f ./frontend/Dockerfile .'
-                sh    'docker build -t ${DOCKERHUB_USERNAME}/notes-app-backend:$params.Frontend_Docker_TAG -f ./backend/Dockerfile .'
-            }
-        }
-    }
 }
