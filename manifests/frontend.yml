@@ -6,7 +6,7 @@ metadata:
   labels:
     app: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: kartiknaik/task-manager-frontend:v5
+        image: kartiknaik/note-app-frontend:v2
         ports:
         - containerPort: 3000
         readinessProbe:
