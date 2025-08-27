@@ -91,7 +91,10 @@ jobs:
       - name: Read the env 
         run: |
           echo "frontend-version=$(cat frontend/version.txt)" >> $GITHUB_ENV
-          echo "the frontend version is $frontend-version"
+        
+      - name: env
+        run: |
+          echo "Version is ${{ env.frontend-version }}"
 
       # - name: Build and push Docker image
       #   uses: docker/build-push-action@v4
