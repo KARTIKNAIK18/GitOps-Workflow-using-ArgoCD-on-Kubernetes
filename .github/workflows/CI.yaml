@@ -122,7 +122,7 @@ jobs:
 
 
 
-      - name: fonrtend Build and push Docker image
+      - name: forontend Build and push Docker image
         if: steps.image-ex-frontend.outputs.exits == 'false'
         uses: docker/build-push-action@v6
         with:
