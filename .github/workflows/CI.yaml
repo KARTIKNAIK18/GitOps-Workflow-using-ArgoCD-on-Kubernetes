@@ -8,13 +8,6 @@ on:
       - 'frontend/**'
       - 'backend/**'
       - '.github/workflows/CI.yaml'
-    paths-ignore:
-      - 'README.md'
-      - 'docs/**'
-      - '*.md'
-      - '*.txt'
-      - 'manifests/**'
-      - '.gitignore'
   
 jobs:
   cheackout:
