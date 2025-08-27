@@ -122,7 +122,7 @@ jobs:
         if: steps.image-ex-frontend.outputs.exits == 'false'
         uses: docker/build-push-action@v6
         with:
-          context: .frontend
+          context: ./frontend
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/note-app-frontned:${{ env.frontend-version}}
         
