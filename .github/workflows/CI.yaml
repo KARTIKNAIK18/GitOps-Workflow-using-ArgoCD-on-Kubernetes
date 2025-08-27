@@ -81,7 +81,7 @@ jobs:
 
   docker-build:
     runs-on: ubuntu-latest
-    needs: trivy-file-system-scan
+    needs: [trivy-file-system-scan, codeql-analysis]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
