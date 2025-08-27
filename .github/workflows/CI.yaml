@@ -106,6 +106,7 @@ jobs:
               echo "exits=true" >> $GITHUB_OUTPUT
             else
               echo "exits=false" >> $GITHUB_OUTPUT
+            fi
       - name: cheack the backend image existence
         id: image-ex-backend
         run: |
@@ -113,6 +114,7 @@ jobs:
               echo "exits=true" >> $GITHUB_OUTPUT
             else
               echo "exits=false" >> $GITHUB_OUTPUT
+            fi
 
 
 
