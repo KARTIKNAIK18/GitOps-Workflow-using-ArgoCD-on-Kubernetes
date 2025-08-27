@@ -42,7 +42,6 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          upload: never
           output: codeql-report.sarif
       
       - name: logs Artifact
@@ -75,3 +74,30 @@ jobs:
           path: trivy-report.sarif
 
 
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: cheackout
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Read the env 
+        run: |
+          echo "frontend-version=$(cat frontend/version.txt)" >> $GITHUB_ENV
+          echo "the frontend version is $frontend-version"
+
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@v4
+      #   with:
+      #     context: ./frontend
+      #     push: true
+      #     tags: ${{ secrets.DOCKER_HUB_USERNAME }}/my-app:latest
+      #     cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/my-app:cache
+      #     cache-to: type=inline
