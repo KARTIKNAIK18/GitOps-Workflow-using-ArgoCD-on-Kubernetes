@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Avatar, Typography, TextField, Button, Stack, Switch, Box, Divider, Snackbar } from '@mui/material';
-import axios from 'axios';
+import api from '../services/api';
 
 const Profile = ({ tasks, completedCount, onLogout }) => {
   const [profile, setProfile] = useState(null);
@@ -10,8 +10,7 @@ const Profile = ({ tasks, completedCount, onLogout }) => {
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem('token');
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/me`, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await api.get('/users/me');
       setProfile(res.data);
       setForm({
         username: res.data.username || '',
@@ -23,10 +22,13 @@ const Profile = ({ tasks, completedCount, onLogout }) => {
   }, []);
 
   const handleSave = async () => {
-    const token = localStorage.getItem('token');
-    await axios.put(`${process.env.REACT_APP_API_URL}/users/me`, form, { headers: { Authorization: `Bearer ${token}` } });
-    setSnackbar('Profile updated!');
-    setEditMode(false);
+    try {
+      await api.put('/users/me', form);
+      setSnackbar('Profile updated!');
+      setEditMode(false);
+    } catch (error) {
+      setSnackbar('Error updating profile');
+    }
   };
 
   if (!profile) return <Typography>Loading...</Typography>;

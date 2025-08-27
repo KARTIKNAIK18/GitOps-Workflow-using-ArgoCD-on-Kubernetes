@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import TaskList from '../components/TaskList';
 import AddEditTaskModal from '../components/AddEditTaskModal';
 import Profile from './Profile';
-import axios from 'axios';
+import api from '../services/api';
 
 const ENABLE_NOTIFICATIONS = true;
 const ENABLE_DARK_MODE = true;
@@ -20,8 +20,7 @@ const Dashboard = ({ toggleDarkMode }) => {
   const [filter, setFilter] = useState('all'); // 'all', 'pending', 'completed', 'profile'
 
   const fetchTasks = async () => {
-    const token = localStorage.getItem('token');
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/tasks`, { headers: { Authorization: `Bearer ${token}` } });
+    const res = await api.get('/tasks');
     setTasks(res.data);
   };
 
@@ -40,30 +39,39 @@ const Dashboard = ({ toggleDarkMode }) => {
   };
 
   const handleSaveTask = async (task) => {
-    const token = localStorage.getItem('token');
-    if (editTask) {
-      await axios.put(`${process.env.REACT_APP_API_URL}/tasks/${editTask._id}`, task, { headers: { Authorization: `Bearer ${token}` } });
-      setNotification('Task updated!');
-    } else {
-      await axios.post(`${process.env.REACT_APP_API_URL}/tasks`, task, { headers: { Authorization: `Bearer ${token}` } });
-      setNotification('Task added!');
+    try {
+      if (editTask) {
+        await api.put(`/tasks/${editTask._id}`, task);
+        setNotification('Task updated!');
+      } else {
+        await api.post('/tasks', task);
+        setNotification('Task added!');
+      }
+      setOpenModal(false);
+      fetchTasks();
+    } catch (error) {
+      setNotification('Error saving task');
     }
-    setOpenModal(false);
-    fetchTasks();
   };
 
   const handleDeleteTask = async (id) => {
-    const token = localStorage.getItem('token');
-    await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-    setNotification('Task deleted!');
-    fetchTasks();
+    try {
+      await api.delete(`/tasks/${id}`);
+      setNotification('Task deleted!');
+      fetchTasks();
+    } catch (error) {
+      setNotification('Error deleting task');
+    }
   };
 
   const handleCompleteTask = async (id, status) => {
-    const token = localStorage.getItem('token');
-    await axios.put(`${process.env.REACT_APP_API_URL}/tasks/${id}`, { status }, { headers: { Authorization: `Bearer ${token}` } });
-    setNotification(status === 'completed' ? 'Task completed!' : 'Task marked as pending!');
-    fetchTasks();
+    try {
+      await api.put(`/tasks/${id}`, { status });
+      setNotification(status === 'completed' ? 'Task completed!' : 'Task marked as pending!');
+      fetchTasks();
+    } catch (error) {
+      setNotification('Error updating task status');
+    }
   };
 
   const completedCount = tasks.filter(t => t.status === 'completed').length;

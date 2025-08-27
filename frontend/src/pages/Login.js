@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Card, CardContent, Typography, TextField, Button, Stack } from '@mui/material';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../services/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ const Login = () => {
     try {
       const endpoint = isSignup ? '/auth/signup' : '/auth/login';
       const payload = isSignup ? { username, email, password } : { username, password };
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}${endpoint}`, payload);
+      const res = await api.post(endpoint, payload);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
