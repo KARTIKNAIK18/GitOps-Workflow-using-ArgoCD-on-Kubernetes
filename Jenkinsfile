@@ -18,17 +18,28 @@ pipeline{
 
                     FRONTENDIMAGE = "${env.DOCKER_USER}/note-app-frontend:${FRONTEND_VERSION}"
                     BACKENDIMAGE = "${env.DOCKER_USER}/note-app-backend:${BACKEND_VERSION}"
+                    
+                    // Debug output
+                    echo "Frontend image: ${FRONTENDIMAGE}"
+                    echo "Backend image: ${BACKENDIMAGE}"
                 }
             }
         }
         stage('Update Manifests'){
             steps{
-                sh '''
-                    sed -i "s|image: .*|image: ${FRONTENDIMAGE}|g" manifests/frontend.yml
-                    sed -i "s|image: .*|image: ${BACKENDIMAGE}|g" manifests/backend.yml
-                '''
-                sh 'cat manifests/frontend.yml'
-                sh 'cat manifests/backend.yml'
+                script {
+                    sh """
+                        echo "Updating manifest with frontend image: ${FRONTENDIMAGE}"
+                        sed -i 's|image: .*|image: ${FRONTENDIMAGE}|g' manifests/frontend.yml
+                        
+                        echo "Updating manifest with backend image: ${BACKENDIMAGE}"
+                        sed -i 's|image: .*|image: ${BACKENDIMAGE}|g' manifests/backend.yml
+                        
+                        echo "Checking updated manifests:"
+                        cat manifests/frontend.yml
+                        cat manifests/backend.yml
+                    """
+                }
             }
 
         }    
