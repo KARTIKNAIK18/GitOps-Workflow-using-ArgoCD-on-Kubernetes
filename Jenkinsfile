@@ -31,30 +31,33 @@ pipeline{
             }
 
         }    
-  stage("Git: Code update and push to GitHub"){
-    steps{
-        script{
-            withCredentials([usernamePassword(credentialsId: 'Github-cred', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                sh '''
-                echo "Checking repository status: "
-                git status
-            
-                echo "Adding changes to git: "
-                git add manifests/
-                
-                echo "Committing changes: "
-                git commit -m "Updated environment variables" || echo "No changes to commit"
-                
-                echo "Setting remote with credentials: "
-                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
-
-                echo "Pushing changes to GitHub: "
-                git push origin main
-                '''
+        stage('Git Push') {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
+                        sh '''
+                            # Configure git
+                            git config user.email "kartiknaik560@gmail.com"
+                            git config user.name "KARTIKNAIK18"
+                            
+                            # Check status and add changes
+                            echo "Checking git status"
+                            git status
+                            
+                            echo "Adding changes"
+                            git add manifests/
+                            
+                            # Commit changes if any
+                            git diff --staged --quiet || git commit -m "Updated manifests [skip ci]"
+                            
+                            # Set remote with token and push
+                            git remote set-url origin https://${GITHUB_TOKEN}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
+                            git push origin main
+                        '''
+                    }
+                }
             }
         }
-    }
-}
 
 }
 }
