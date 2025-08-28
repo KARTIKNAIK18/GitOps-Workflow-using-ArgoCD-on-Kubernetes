@@ -2,6 +2,8 @@ pipeline{
     agent any
     environment{
         DOCKER_USER = credentials('DOCKER_USER')
+        GITHUB_USER = credentials('Github-user')
+        GITHUB_EMAIL = credentials('github-email')
     }
     stages{
         stage('Cheackout'){
@@ -37,6 +39,11 @@ pipeline{
                 script{
                     sh '''
                         git status
+                        git config --global user.email ${env.GITHUB_EMAIL}
+                        git config --global user.name  ${env.GITHUB_USER}
+                        git add manifests/
+                        git commit -m "Updated images in the manifests"
+                        git push origin main
                     
                         '''
                 }
