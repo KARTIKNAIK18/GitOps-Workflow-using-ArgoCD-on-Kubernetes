@@ -34,22 +34,25 @@ pipeline{
 
         }    
 
-        stage('upload to github'){
-            steps{
-                sh 'git status'
-
-                withCredentials([string(credentialsID: 'GITHUB_TOKEN', variable: 'TOKEN')]) {
-                    sh '''
-                        git config --global user.name "${GITHUB_USER}"
-                        git config --global user.email "${GITHUB_EMAIL}"
-                        git add .manifests/
-                        git commit -m "Updated image versions in manifests"
-                        git push 
-                        '''
-
-            }
+  stage('upload to github') {
+    steps {
+        withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'TOKEN')]) {
+            sh '''
+                git config --global user.name "${GITHUB_USER}"
+                git config --global user.email "${GITHUB_EMAIL}"
+                
+                git add manifests/
+                git commit -m "Updated image versions in manifests" || echo "No changes to commit"
+                
+                # Update remote URL to include token for authentication
+                git remote set-url origin https://${GITHUB_USER}:${TOKEN}@github.com/${GITHUB_USER}/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
+                
+                git push origin main
+            '''
         }
-            }
+    }
+}
+
 }
 
 }
