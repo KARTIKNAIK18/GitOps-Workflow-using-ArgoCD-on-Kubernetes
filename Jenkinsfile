@@ -36,7 +36,7 @@ pipeline{
             steps {
                 script {
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-                        sh '''
+                        sh """
                             # Configure git
                             git config user.email "${env.EMAIL}"
                             git config user.name "KARTIKNAIK18"
@@ -54,7 +54,7 @@ pipeline{
                             # Set remote with token and push
                             git remote set-url origin https://${GITHUB_TOKEN}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
                             git push origin main
-                        '''
+                        """
                     }
                 }
             }
