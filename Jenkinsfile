@@ -34,23 +34,26 @@ pipeline{
 
         }    
 
-        stage('upload to github') {
-        steps {
-            withCredentials([usernamePassword(credentialsId: 'GITHUB-TOKEN', gitToolName: 'Default')]) {
-                sh '''
-                    echo "cheacking git status"
-                    git status
-                    
-                    echo "adding the files to the tree"
-                    git add manifests/
-
-                    echo "Commiting the changes"
-                    git commit -m "Updated image versions in manifests" || echo "No changes to commit"
-                    
-                    echo "Pushing the changes to remote repository"
-                    git push https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git main
-                '''
-    
+        stage('Upload to GitHub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'GITHUB-TOKEN', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh '''
+                        git config --global user.email "${GITHUB_EMAIL}"
+                        git config --global user.name "${GITHUB_USER}"
+                        
+                        echo "Checking git status"
+                        git status
+                        
+                        echo "Adding the manifests files"
+                        git add manifests/
+                        
+                        echo "Committing the changes"
+                        git commit -m "Updated image versions in manifests [skip ci]"
+                        
+                        echo "Pushing to GitHub"
+                        git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
+                        git push origin main
+                    '''
                 }
             }
         }
