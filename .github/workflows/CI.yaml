@@ -143,16 +143,16 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/note-app-backend:${{ env.backend-verion}}  
 
 
-  # jenkins-trigger:
-  #   name: trigger jenkins job
-  #   needs: docker-build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Trigger jenkins job
-  #       uses: joshlk/jenkins-githubaction@master
-  #       with:
-  #         url: ${{ secrets.JENKINS_URL }}
-  #         job_name: Gitops-CD
-  #         username: ${{ secrets.JENKINS_USER }}
-  #         api_token: ${{ secrets.JENKINS_TOKEN }}
-  #         timeout: "60"
+  jenkins-trigger:
+    name: trigger jenkins job
+    needs: docker-build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger jenkins job
+        uses: joshlk/jenkins-githubaction@master
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          job_name: Gitops-CD
+          username: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          timeout: "60"
