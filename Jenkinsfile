@@ -32,7 +32,7 @@ pipeline{
 
         }    
 
-        stage{
+        stage('upload to github'){
             steps{
                 script{
                     sh '''
