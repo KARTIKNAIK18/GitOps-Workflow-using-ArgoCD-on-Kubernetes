@@ -44,8 +44,6 @@ pipeline{
                 git add manifests/
                 git commit -m "Updated image versions in manifests" || echo "No changes to commit"
                 
-                # Update remote URL to include token for authentication
-                git remote set-url origin https://${GITHUB_USER}:${TOKEN}@github.com/${GITHUB_USER}/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
                 
                 git push origin main
             '''
