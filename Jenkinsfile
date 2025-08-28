@@ -36,7 +36,7 @@ pipeline{
 
   stage('upload to github') {
     steps {
-        withCredentials([string(credentialsId: 'GITHUB_TOKEN', variable: 'TOKEN')]) {
+        withCredentials([usernamePassword(credentialsId: 'GITHUB-TOKEN', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
             sh '''
                 git config --global user.name "${GITHUB_USER}"
                 git config --global user.email "${GITHUB_EMAIL}"
