@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: backend-container
-        image: kartiknaik/note-app-backend:v1
+        image: 
         ports:
         - containerPort: 5000
         env:
