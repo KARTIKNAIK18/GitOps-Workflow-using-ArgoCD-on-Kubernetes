@@ -30,7 +30,18 @@ pipeline{
                 sh 'cat manifests/backend.yml'
             }
 
-        }       
+        }    
+
+        stage{
+            steps{
+                script{
+                    sh '''
+                        git status
+                    
+                        '''
+                }
+            }
+        }   
     }
 
 }
