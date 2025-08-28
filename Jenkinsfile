@@ -31,26 +31,30 @@ pipeline{
             }
 
         }    
-          stage("Git: Code update and push to GitHub"){
-            steps{
-                script{
-                    withCredentials([gitUsernamePassword(credentialsId: 'Github-cred', gitToolName: 'Default')]) {
-                        sh '''
-                        echo "Checking repository status: "
-                        git status
-                    
-                        echo "Adding changes to git: "
-                        git add manifests/
-                        
-                        echo "Commiting changes: "
-                        git commit -m "Updated environment variables"
-                        
-                        echo "Pushing changes to github: "
-                        git push https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git main
-                    '''
-                    }
-                }
+  stage("Git: Code update and push to GitHub"){
+    steps{
+        script{
+            withCredentials([usernamePassword(credentialsId: 'Github-cred', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                sh '''
+                echo "Checking repository status: "
+                git status
+            
+                echo "Adding changes to git: "
+                git add manifests/
+                
+                echo "Committing changes: "
+                git commit -m "Updated environment variables" || echo "No changes to commit"
+                
+                echo "Setting remote with credentials: "
+                git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
+
+                echo "Pushing changes to GitHub: "
+                git push origin main
+                '''
             }
+        }
     }
+}
+
 }
 }
