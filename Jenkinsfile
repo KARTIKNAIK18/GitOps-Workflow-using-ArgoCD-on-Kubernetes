@@ -42,7 +42,7 @@ pipeline{
                     sh '''
                         git config --global user.name "${GITHUB_USER}"
                         git config --global user.email "${GITHUB_EMAIL}"
-                        git add manifests/
+                        git add .manifests/
                         git commit -m "Updated image versions in manifests"
                         git push 
                         '''
