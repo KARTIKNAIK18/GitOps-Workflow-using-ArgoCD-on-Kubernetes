@@ -27,6 +27,14 @@ spec:
           value: "mongodb://root:root@mongo-service:27017/taskmanager?authSource=admin"
         - name: JWT_SECRET
           value: "your_jwt_secret_here"
+        readinessProbe:
+          httpGet:
+          path: /api
+          port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 5    
+          failureThreshold: 3
+
 
 ---
 
@@ -44,3 +52,4 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 5000
+  type: NodePort
