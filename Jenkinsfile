@@ -36,7 +36,7 @@ pipeline{
 
         stage('Upload to GitHub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'GITHUB-TOKEN', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([string(credentialsId: 'GITHUB-TOKEN', variable: 'GITHUB_TOKEN')]) {
                     sh '''
                         git config --global user.email "${GITHUB_EMAIL}"
                         git config --global user.name "${GITHUB_USER}"
@@ -48,10 +48,10 @@ pipeline{
                         git add manifests/
                         
                         echo "Committing the changes"
-                        git commit -m "Updated image versions in manifests [skip ci]"
+                        git diff --quiet && git diff --staged --quiet || git commit -m "Updated image versions in manifests [skip ci]"
                         
                         echo "Pushing to GitHub"
-                        git remote set-url origin https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
+                        git remote set-url origin https://${GITHUB_TOKEN}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
                         git push origin main
                     '''
                 }
