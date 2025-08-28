@@ -45,8 +45,10 @@ pipeline{
                         git add manifests/
                         git commit -m "Updated image versions in manifests"
                         git push 
+
             }
-        }   
-    }
+        }
+            }
+}
 
 }
