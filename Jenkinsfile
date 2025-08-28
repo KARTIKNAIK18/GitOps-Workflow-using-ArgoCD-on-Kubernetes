@@ -2,6 +2,7 @@ pipeline{
     agent any
     environment{
             DOCKER_USER = 'kartiknaik'
+            EMAIL = credentials('git-email')
     }
     stages{
         stage('Cheackout'){
@@ -37,7 +38,7 @@ pipeline{
                     withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                         sh '''
                             # Configure git
-                            git config user.email "kartiknaik560@gmail.com"
+                            git config user.email "${env.EMAIL}"
                             git config user.name "KARTIKNAIK18"
                             
                             # Check status and add changes
