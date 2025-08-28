@@ -1,9 +1,7 @@
 pipeline{
     agent any
     environment{
-        DOCKER_USER = credentials('DOCKER_USER')
-        GITHUB_USER = credentials('Github-user')
-        GITHUB_EMAIL = credentials('github-email')
+            DOCKER_USER = 'kartiknaik'
     }
     stages{
         stage('Cheackout'){
@@ -33,29 +31,26 @@ pipeline{
             }
 
         }    
-
-        stage('Upload to GitHub') {
-            steps {
-                withCredentials([string(credentialsId: 'GITHUB-TOKEN', variable: 'GITHUB_TOKEN')]) {
-                    sh '''
-                        git config --global user.email "${GITHUB_EMAIL}"
-                        git config --global user.name "${GITHUB_USER}"
-                        
-                        echo "Checking git status"
+          stage("Git: Code update and push to GitHub"){
+            steps{
+                script{
+                    withCredentials([gitUsernamePassword(credentialsId: 'Github-cred', gitToolName: 'Default')]) {
+                        sh '''
+                        echo "Checking repository status: "
                         git status
-                        
-                        echo "Adding the manifests files"
+                    
+                        echo "Adding changes to git: "
                         git add manifests/
                         
-                        echo "Committing the changes"
-                        git diff --quiet && git diff --staged --quiet || git commit -m "Updated image versions in manifests [skip ci]"
+                        echo "Commiting changes: "
+                        git commit -m "Updated environment variables"
                         
-                        echo "Pushing to GitHub"
-                        git remote set-url origin https://${GITHUB_TOKEN}@github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git
-                        git push origin main
+                        echo "Pushing changes to github: "
+                        git push  main
                     '''
+                    }
                 }
             }
-        }
     }
+}
 }
