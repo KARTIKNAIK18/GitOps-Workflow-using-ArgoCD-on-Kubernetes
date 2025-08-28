@@ -46,7 +46,7 @@ pipeline{
                         git commit -m "Updated environment variables"
                         
                         echo "Pushing changes to github: "
-                        git push  main
+                        git push https://github.com/KARTIKNAIK18/GitOps-Workflow-using-ArgoCD-on-Kubernetes.git main
                     '''
                     }
                 }
