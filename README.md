@@ -103,8 +103,8 @@ notes-app/
 
 ## ⚙️ CI/CD Workflow
 
-<details> 
-  <summary><strong>🔹 GitHub Actions (CI)</strong></summary>
+
+### 🔹 GitHub Actions (CI)
 
 **Triggered on push to `frontend/` or `backend/`**
 
@@ -114,14 +114,11 @@ notes-app/
 - Build & push Docker image (if version changed)  
 
 📸 **Screenshots:**  
-<img src="rsc/actions.png" width="600"/>  
-<img src="rsc/github-build-artifacts.png" width="600"/>  
-<img src="rsc/dockerbuild-info.png" width="600"/>  
+<img src="rsc/actions.png"/>  
+<img src="rsc/github-build-artifacts.png" />  
+<img src="rsc/dockerbuild-info.png" />  
 
-</details>
-
-<details> 
-  <summary><strong>🔸 Jenkins (CD)</strong></summary>
+### 🔸 Jenkins (CD)
 
 **Triggered via GitHub Actions webhook (with secret token)**  
 
@@ -130,42 +127,38 @@ notes-app/
 - Deploy to cluster  
 
 📸 **Jenkins CD:**  
-<img src="rsc/jenkins.png" width="600"/>  
+<img src="rsc/jenkins.png"/>  
 
-</details>
-
-<details> 
-  <summary><strong>🔹 ArgoCD (GitOps)</strong></summary>
+###  🔹 ArgoCD (GitOps)
 
 - Auto-sync updated manifests from Git repo  
 - Apply changes to Kubernetes  
 - Maintain desired state  
 
 📸 **ArgoCD Screenshots:**  
-<img src="rsc/argocd-application.png" width="600"/>  
-<img src="rsc/argocd.png" width="600"/>  
+<img src="rsc/argocd-application.png" />  
+<img src="rsc/argocd.png" />  
 
-</details>
 
 ---
 
 ##  Application Output
 
 🔓 **Login Page**  
-<img src="rsc/login.png" width="500"/>  
+<img src="rsc/login.png" />  
 
 🏠 **Home Screen**  
-<img src="rsc/application-home.png" width="500"/>  
+<img src="rsc/application-home.png" />  
 
 👤 **Profile View**  
-<img src="rsc/appliactionprofile.png" width="500"/>  
+<img src="rsc/appliactionprofile.png" />  
 
 ---
 
 ##  Monitoring
 
 📸 **Grafana Dashboard:**  
-<img src="rsc/grafana.png" width="600"/>  
+<img src="rsc/grafana.png" />  
 
 ---
 
