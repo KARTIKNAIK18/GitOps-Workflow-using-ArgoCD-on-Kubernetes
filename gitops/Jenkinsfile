@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-            DOCKER_USER = 'kartiknaik'
+            DOCKER_USER = credentials('DOCKER-USER')
             EMAIL = credentials('git-email')
     }
     stages{
@@ -50,7 +50,7 @@ pipeline{
                         sh """
                             # Configure git
                             git config user.email "${env.EMAIL}"
-                            git config user.name "KARTIKNAIK18"
+                            git config user.name "${env.USERNAME}"
                             
                             # Check status and add changes
                             echo "Checking git status"
