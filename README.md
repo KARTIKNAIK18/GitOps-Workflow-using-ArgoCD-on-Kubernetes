@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="50" alt="GitHub"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="50" alt="GitHub" style="background:white; padding:5px; border-radius:8px;"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" height="50" alt="Jenkins"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" height="50" alt="Kubernetes"/>
   <img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/argo/icon/color/argo-icon-color.svg" height="50" alt="ArgoCD"/>
@@ -21,7 +21,6 @@ A production-grade <strong>GitOps-powered CI/CD pipeline</strong> for a Notes Ap
 
 This project delivers a production-grade **GitOps CI/CD pipeline** for a Notes Application, combining automation, security, and observability across every stage of deployment.
 
----
 
 ### 🔹 CI/CD & GitOps Flow
 
@@ -56,7 +55,6 @@ Pulls latest Docker image, updates Kubernetes manifests, and deploys to cluster 
 </p>
 Continuously syncs manifests from Git repo to Kubernetes. Maintains desired state and supports rollback.
 
----
 
 ## Monitoring & Observability
 
@@ -102,9 +100,9 @@ Triggered on push to `frontend/` or `backend/`.
 -   Build & push Docker image (if version changed)
 
 📸 
-CI  PIPELINE: <img src="actions.png" width="600"/> </details>
-CI  PIPELINE: <img src="github-build-artifacts.png" width="600"/> </details>
-CI  PIPELINE: <img src="dockerbuild-info.png" width="600"/> </details>
+CI  PIPELINE: <img src="src/actions.png" width="600"/> </details>
+CI  PIPELINE: <img src="src/github-build-artifacts.png" width="600"/> </details>
+CI  PIPELINE: <img src="src/dockerbuild-info.png" width="600"/> </details>
 	
 
 <details> <summary><strong>🔸 Jenkins (CD)</strong></summary>
@@ -117,7 +115,7 @@ Triggered via  Github Actions Jenkins url  with secret token.
 -   Update Kubernetes manifests
 -   Deploy to cluster
 
-📸 Jenkins CD: <img src="jenkins.png" width="600"/> <img src="jnkins-ec2.png" width="600"/> </details>
+📸 Jenkins CD: <img src="src/jenkins.png" width="600"/> <img src="jnkins-ec2.png" width="600"/> </details>
 
 <details> <summary><strong>🔹 ArgoCD (GitOps)</strong></summary>
 
@@ -127,7 +125,7 @@ Triggered via  Github Actions Jenkins url  with secret token.
 -   Apply changes to Kubernetes
 -   Maintain desired state
 
-📸 ArgoCD Screenshots: <img src="argocd-application.png" width="600"/> <img src="argocd.png" width="600"/> </details>
+📸 ArgoCD Screenshots: <img src="src/argocd-application.png" width="600"/> <img src="argocd.png" width="600"/> </details>
 
 ----------
 
@@ -138,44 +136,22 @@ Feature
 Screenshot
 
 🔓 Login Page
-<img src="login.png" width="400"/>
+<img src="src/login.png" width="400"/>
 
 🏠 Home Screen
 
-<img src="application-home.png" width="400"/>
+<img src="src/application-home.png" width="400"/>
 
 👤 Profile View
 
-<img src="appliactionprofile.png" width="400"/>
+<img src="src/appliactionprofile.png" width="400"/>
 
 ----------
 
 ## 📊 Monitoring
 
-**Grafana Dashboard:** <img src="grafana.png" width="600"/>
+**Grafana Dashboard:** <img src="src/grafana.png" width="600"/>
 
-**Prometheus Metrics:** _(Add screenshot if available)_
-
-----------
-
-## 🧾 Quick Commands
-
-```bash
-# Start MicroK8s cluster
-microk8s start
-microk8s enable dns storage
-
-# Trigger Jenkins pipeline (via GitHub Actions webhook)
-
-# Deploy ArgoCD manifests
-kubectl apply -n argocd -f <argocd-manifest.yaml>
-
-# Sync ArgoCD application
-argocd app sync notes-app
-
-```
-
-----------
 
 ## 💡 Tips
 
