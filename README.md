@@ -1,4 +1,3 @@
-
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="50" alt="GitHub" style="background:white; padding:5px; border-radius:8px;"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" height="50" alt="Jenkins"/>
@@ -16,62 +15,79 @@ A production-grade <strong>GitOps-powered CI/CD pipeline</strong> for a Notes Ap
 
 ---
 
-
 ## ![Summary Icon](https://img.shields.io/badge/Summary-Project%20Overview-blue?style=flat-square&logo=readme&logoColor=white)
 
 This project delivers a production-grade **GitOps CI/CD pipeline** for a Notes Application, combining automation, security, and observability across every stage of deployment.
 
+---
 
-### 🔹 CI/CD & GitOps Flow
+## 🔹 CI/CD & GitOps Flow
 
-**GitHub Actions**  
+### **GitHub Actions**  
 <p align="left">
   <img src="https://img.shields.io/badge/GitHub%20Actions-Automated%20CI-blue?style=flat&logo=githubactions&logoColor=white" alt="GitHub Actions" width="220"/>
 </p>
-Triggers on code push to `frontend/` or `backend`, runs security scans, checks `version.txt`, and initiates Docker builds.
 
-**Security Scanning**  
+- Triggers on code push to `frontend/` or `backend`  
+- Runs security scans  
+- Checks `version.txt`  
+- Initiates Docker builds  
+
+---
+
+### **Security Scanning**  
 <p align="left">
   <img src="https://img.shields.io/badge/Trivy-FS%20Scan-critical?style=flat&logo=trivy&logoColor=white" alt="Trivy FS Scan" width="120" style="margin-right:10px;"/>
   <img src="https://img.shields.io/badge/CodeQL-Static%20Analysis-green?style=flat&logo=github&logoColor=white" alt="CodeQL Static Analysis" width="180"/>
 </p>
-Trivy scans for vulnerabilities, CodeQL performs static analysis to ensure code quality before build.
 
-**Docker Build & Push**  
+- **Trivy** scans for vulnerabilities  
+- **CodeQL** performs static analysis  
+
+---
+
+### **Docker Build & Push**  
 <p align="left">
   <img src="https://img.shields.io/badge/Docker-Versioned%20Images-blue?style=flat&logo=docker&logoColor=white" alt="Docker Build" width="200"/>
 </p>
-Builds container images only if `version.txt` changes. Tags semantically and pushes to registry.
 
-**Jenkins Deployment**  
+- Builds container images only if `version.txt` changes  
+- Semantic tagging  
+- Pushes to registry  
+
+---
+
+### **Jenkins Deployment**  
 <p align="left">
   <img src="https://img.shields.io/badge/Jenkins-CD%20Pipeline-orange?style=flat&logo=jenkins&logoColor=white" alt="Jenkins Pipeline" width="180"/>
 </p>
-Pulls latest Docker image, updates Kubernetes manifests, and deploys to cluster via webhook.
 
-**ArgoCD GitOps Sync**  
+- Pulls latest Docker image  
+- Updates Kubernetes manifests  
+- Deploys to cluster via webhook  
+
+---
+
+### **ArgoCD GitOps Sync**  
 <p align="left">
   <img src="https://img.shields.io/badge/ArgoCD-GitOps%20Sync-red?style=flat&logo=argo&logoColor=white" alt="ArgoCD Sync" width="180"/>
 </p>
-Continuously syncs manifests from Git repo to Kubernetes. Maintains desired state and supports rollback.
 
+- Continuously syncs manifests from Git repo  
+- Maintains desired state  
+- Supports rollback  
 
-## Monitoring & Observability
+---
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Grafana-Dashboard-yellow?style=flat&logo=grafana&logoColor=white" alt="Grafana Dashboard" width="160" style="margin-right:15px;"/>
-  <img src="https://img.shields.io/badge/Prometheus-Metrics-orange?style=flat&logo=prometheus&logoColor=white" alt="Prometheus Metrics" width="160"/>
-</p>
-  
-Tracks app health, resource usage, and performance metrics with real-time dashboards and alerts.
+## ✅ Highlights
 
+- 🚀 Zero-touch deployment with GitOps principles  
+- 🧩 Modular architecture for scalability  
+- 🔐 Security-first CI (Trivy, CodeQL)  
+- 📊 Real-time observability with Grafana dashboards  
+- 🔄 Production-ready pipeline with rollback support  
 
-
-### ✅ Highlights
-- Zero-touch deployment with GitOps principles  
-- Modular architecture for scalability  
-- Real-time observability with custom dashboards  
-- Built for clarity, automation, and production-readiness
+---
 
 ## 📁 Project Structure
 
@@ -82,83 +98,83 @@ notes-app/
 ├── 🔄 gitops/        → GitOps automation configs (Jenkins jobs)
 ├── 📜 manifests/     → Kubernetes manifests (Deployments, Services, Ingress, etc.)
 ├── 🗂️ rsc/           → Resources (monitoring configs, Grafana dashboards, images, docs)
+
 ```
-
-
 
 ## ⚙️ CI/CD Workflow
 
-<details> <summary><strong>🔹 GitHub Actions (CI)</strong></summary>
+<details> 
+  <summary><strong>🔹 GitHub Actions (CI)</strong></summary>
 
-Triggered on push to `frontend/` or `backend/`.
+**Triggered on push to `frontend/` or `backend/`**
 
-**Steps:**
+- Run Trivy FS scan  
+- Run CodeQL analysis  
+- Check `version.txt`  
+- Build & push Docker image (if version changed)  
 
--   Run Trivy FS scan
--   Run CodeQL analysis
--   Check `version.txt`
--   Build & push Docker image (if version changed)
+📸 **Screenshots:**  
+<img src="rsc/actions.png" width="600"/>  
+<img src="rsc/github-build-artifacts.png" width="600"/>  
+<img src="rsc/dockerbuild-info.png" width="600"/>  
 
-📸 
-CI  PIPELINE: <img src="rsc/actions.png" width="600"/> </details>
-CI  PIPELINE: <img src="rsc/github-build-artifacts.png" width="600"/> </details>
-CI  PIPELINE: <img src="rsc/dockerbuild-info.png" width="600"/> </details>
-	
+</details>
 
-<details> <summary><strong>🔸 Jenkins (CD)</strong></summary>
+<details> 
+  <summary><strong>🔸 Jenkins (CD)</strong></summary>
 
-Triggered via  Github Actions Jenkins url  with secret token.
+**Triggered via GitHub Actions webhook (with secret token)**  
 
-**Steps:**
+- Verify Docker image existence  
+- Update Kubernetes manifests  
+- Deploy to cluster  
 
--   Verify Docker image existence
--   Update Kubernetes manifests
--   Deploy to cluster
+📸 **Jenkins CD:**  
+<img src="rsc/jenkins.png" width="600"/>  
 
-📸 Jenkins CD: <img src="rsc/jenkins.png" width="600"/> <img src="rsc/jnkins-ec2.png" width="600"/> </details>
+</details>
 
-<details> <summary><strong>🔹 ArgoCD (GitOps)</strong></summary>
+<details> 
+  <summary><strong>🔹 ArgoCD (GitOps)</strong></summary>
 
-**Steps:**
+- Auto-sync updated manifests from Git repo  
+- Apply changes to Kubernetes  
+- Maintain desired state  
 
--   Auto-sync updated manifests from Git repo
--   Apply changes to Kubernetes
--   Maintain desired state
+📸 **ArgoCD Screenshots:**  
+<img src="rsc/argocd-application.png" width="600"/>  
+<img src="rsc/argocd.png" width="600"/>  
 
-📸 ArgoCD Screenshots: <img src="rsc/argocd-application.png" width="600"/> <img src="rsc/argocd.png" width="600"/> </details>
+</details>
 
-----------
+---
 
-## 🧪 Application Screens
+##  Application Output
 
-Feature
+🔓 **Login Page**  
+<img src="rsc/login.png" width="500"/>  
 
-Screenshot
+🏠 **Home Screen**  
+<img src="rsc/application-home.png" width="500"/>  
 
-🔓 Login Page
-<img src="rsc/login.png" width="400"/>
+👤 **Profile View**  
+<img src="rsc/appliactionprofile.png" width="500"/>  
 
-🏠 Home Screen
+---
 
-<img src="rsc/application-home.png" width="400"/>
+##  Monitoring
 
-👤 Profile View
+📸 **Grafana Dashboard:**  
+<img src="rsc/grafana.png" width="600"/>  
 
-<img src="rsc/appliactionprofile.png" width="400"/>
-
-----------
-
-## 📊 Monitoring
-
-**Grafana Dashboard:** <img src="rsc/grafana.png" width="600"/>
-
+---
 
 ## 💡 Tips
 
--   ✅ Enable ArgoCD Auto-Sync for zero-touch deployment
--   🧹 Use Server-Side Apply + Prune Last for safe updates
--   📈 Monitor app health via Grafana dashboards & Prometheus metrics
+- ✅ Enable ArgoCD Auto-Sync for zero-touch deployment  
+- 🧹 Use Server-Side Apply + Prune Last for safe updates  
+- 📈 Monitor app health via Grafana dashboards & Prometheus metrics  
 
-----------
+---
 
 <p align="center"> Made with ❤️ using GitOps principles, CI/CD automation, and cloud-native tools. </p>
