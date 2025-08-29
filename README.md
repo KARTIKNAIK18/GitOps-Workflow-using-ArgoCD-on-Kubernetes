@@ -114,9 +114,17 @@ notes-app/
 - Build & push Docker image (if version changed)  
 
 📸 **Screenshots:**  
-<img src="rsc/actions.png"/>  
+📸 **Screenshots:**  
+
+**GitHub Actions Workflow**  
+<img src="rsc/actions.png" />  
+
+**Build Artifacts**  
 <img src="rsc/github-build-artifacts.png" />  
+
+**Docker Build Info**  
 <img src="rsc/dockerbuild-info.png" />  
+ 
 
 ### 🔸 Jenkins (CD)
 
@@ -136,8 +144,12 @@ notes-app/
 - Maintain desired state  
 
 📸 **ArgoCD Screenshots:**  
+**ArgoCD Application View**  
 <img src="rsc/argocd-application.png" />  
+
+**ArgoCD Dashboard**  
 <img src="rsc/argocd.png" />  
+
 
 
 ---
