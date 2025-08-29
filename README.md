@@ -117,13 +117,13 @@ notes-app/
 📸 **Screenshots:**  
 
 **GitHub Actions Workflow**  
-<img src="rsc/actions.png" />  
+<img src="rsc/actions1.png" />  
 
 **Build Artifacts**  
-<img src="rsc/github-build-artifacts.png" />  
+<img src="rsc/artifacts.png" />  
 
 **Docker Build Info**  
-<img src="rsc/dockerbuild-info.png" />  
+<img src="rsc/dockerbuild.png" />  
  
 
 ### 🔸 Jenkins (CD)
@@ -134,8 +134,8 @@ notes-app/
 - Update Kubernetes manifests  
 - Deploy to cluster  
 
-📸 **Jenkins CD:**  
-<img src="rsc/jenkins.png"/>  
+📸 **Jenkins CD:** 
+<img src="rsc/jenkins1.png"/>  
 
 ###  🔹 ArgoCD (GitOps)
 
@@ -145,10 +145,10 @@ notes-app/
 
 📸 **ArgoCD Screenshots:**  
 **ArgoCD Application View**  
-<img src="rsc/argocd-application.png" />  
+<img src="rsc/argocd1.png" />  
 
 **ArgoCD Dashboard**  
-<img src="rsc/argocd.png" />  
+<img src="rsc/argocd2.png" />  
 
 
 
