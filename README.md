@@ -100,9 +100,9 @@ Triggered on push to `frontend/` or `backend/`.
 -   Build & push Docker image (if version changed)
 
 📸 
-CI  PIPELINE: <img src="src/actions.png" width="600"/> </details>
-CI  PIPELINE: <img src="src/github-build-artifacts.png" width="600"/> </details>
-CI  PIPELINE: <img src="src/dockerbuild-info.png" width="600"/> </details>
+CI  PIPELINE: <img src="rsc/actions.png" width="600"/> </details>
+CI  PIPELINE: <img src="rsc/github-build-artifacts.png" width="600"/> </details>
+CI  PIPELINE: <img src="rsc/dockerbuild-info.png" width="600"/> </details>
 	
 
 <details> <summary><strong>🔸 Jenkins (CD)</strong></summary>
@@ -115,7 +115,7 @@ Triggered via  Github Actions Jenkins url  with secret token.
 -   Update Kubernetes manifests
 -   Deploy to cluster
 
-📸 Jenkins CD: <img src="src/jenkins.png" width="600"/> <img src="jnkins-ec2.png" width="600"/> </details>
+📸 Jenkins CD: <img src="rsc/jenkins.png" width="600"/> <img src="rsc/jnkins-ec2.png" width="600"/> </details>
 
 <details> <summary><strong>🔹 ArgoCD (GitOps)</strong></summary>
 
@@ -125,7 +125,7 @@ Triggered via  Github Actions Jenkins url  with secret token.
 -   Apply changes to Kubernetes
 -   Maintain desired state
 
-📸 ArgoCD Screenshots: <img src="src/argocd-application.png" width="600"/> <img src="argocd.png" width="600"/> </details>
+📸 ArgoCD Screenshots: <img src="rsc/argocd-application.png" width="600"/> <img src="rsc/argocd.png" width="600"/> </details>
 
 ----------
 
@@ -136,21 +136,21 @@ Feature
 Screenshot
 
 🔓 Login Page
-<img src="src/login.png" width="400"/>
+<img src="rsc/login.png" width="400"/>
 
 🏠 Home Screen
 
-<img src="src/application-home.png" width="400"/>
+<img src="rsc/application-home.png" width="400"/>
 
 👤 Profile View
 
-<img src="src/appliactionprofile.png" width="400"/>
+<img src="rsc/appliactionprofile.png" width="400"/>
 
 ----------
 
 ## 📊 Monitoring
 
-**Grafana Dashboard:** <img src="src/grafana.png" width="600"/>
+**Grafana Dashboard:** <img src="rsc/grafana.png" width="600"/>
 
 
 ## 💡 Tips
