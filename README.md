@@ -5,7 +5,10 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="50" alt="Docker"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" height="50" alt="Grafana"/>
 </p>
+[![Report](https://img.shields.io/badge/Project-Report-blue?style=flat&logo=read-the-docs)]
+## 📄 **Project Report**
 
+[Download Report (PDF)](Kubernetes-gitops.pdf)
 <h1 align="center">Kubernetes GitOps Deployment with CI/CD Automation</h1>
 
 <p align="center">
