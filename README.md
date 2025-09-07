@@ -1,7 +1,6 @@
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" height="50" alt="GitHub" style="background:white; padding:5px; border-radius:8px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" height="50" alt="Jenkins"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" height="50" alt="Kubernetes"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" height="50" alt="Jenkins"/>
   <img src="https://raw.githubusercontent.com/cncf/artwork/master/projects/argo/icon/color/argo-icon-color.svg" height="50" alt="ArgoCD"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="50" alt="Docker"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" height="50" alt="Grafana"/>
@@ -124,13 +123,13 @@ notes-app/
 📸 **Screenshots:**  
 
 **GitHub Actions Workflow**  
-<img src="rsc/actions.png" />  
+<img src="rsc/actions1.png" />  
 
 **Build Artifacts**  
-<img src="rsc/github-build-artifacts.png" />  
+<img src="rsc/artifacts.png" />  
 
 **Docker Build Info**  
-<img src="rsc/dockerbuild-info.png" />  
+<img src="rsc/dockerbuild.png" />  
  
 
 ### 🔸 Jenkins (CD)
@@ -141,8 +140,8 @@ notes-app/
 - Update Kubernetes manifests  
 - Deploy to cluster  
 
-📸 **Jenkins CD:**  
-<img src="rsc/jenkins.png"/>  
+📸 **Jenkins CD:** 
+<img src="rsc/jenkins1.png"/>  
 
 ###  🔹 ArgoCD (GitOps)
 
@@ -152,10 +151,10 @@ notes-app/
 
 📸 **ArgoCD Screenshots:**  
 **ArgoCD Application View**  
-<img src="rsc/argocd-application.png" />  
+<img src="rsc/argocd1.png" />  
 
 **ArgoCD Dashboard**  
-<img src="rsc/argocd.png" />  
+<img src="rsc/argocd2.png" />  
 
 
 
