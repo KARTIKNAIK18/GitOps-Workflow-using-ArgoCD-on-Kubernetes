@@ -21,6 +21,13 @@ This project delivers a production-grade **GitOps CI/CD pipeline** for a Notes A
 
 ---
 
+
+## 🖥️ Architecture Diagram
+---
+![Architecture](rsc/gif1.gif)
+
+---
+
 ## 🔹 CI/CD & GitOps Flow
 
 ### **GitHub Actions**  
